@@ -1,0 +1,40 @@
+---
+title: 'September 2020 QB Review: Monetary developments, interest rates and financial markets'
+author: 'Wandile Ndwandwe^[E-mail: Wandile.Ndwandwe@resbank.co.za. Tel: +27 12 399
+  6458.]'
+date: "12/10/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readr)
+library(plotly)
+
+Yieldcurves <- read.csv("~/R/SeptQB.csv", header=T)
+View(Yieldcurves)
+
+
+```
+
+## Yield curves
+
+The level of the yield curve, which initially declined notably and then flattened somewhat from 23 March 2020 to 3 June, again moved higher and steepened to early July amid renewed risk aversion, in particular beyond the five-year maturity range. Thereafter, the level of the yield curve moved slightly lower once more to 11 September 2020, while maintaining a steep slope. The short end reflected the lower repo rate and increased money market liquidity, whereas the 7–10-year maturity range discounted higher risk premiums and increased government borrowing. The yield gap, measured as the difference between yields at the extreme long and short-ends of the curve, narrowed from 803 basis points on 23 March 2020 to 701 basis points on 3 June before widening again to 800 basis points on 11 September.
+
+```{r Yieldcurves, fig.align="center", echo=FALSE, fig.width = 10, fig.height = 4.5, warning=FALSE}
+#creating yield curve plots
+ggplot(data=Yieldcurves, aes(x = Period, y = Percent, color=YC)) +
+  geom_line(size=1.2) +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust=0)) +
+  ggtitle("Yield curves", subtitle = "Unexpired maturity in years") +
+  labs(caption = "Sources: IRESS and JSE")
+ggplotly()
+```

@@ -1,0 +1,73 @@
+---
+title: 'September 2020 EFR: Monthly Commodity derivatives'
+author: 'Wandile Ndwandwe^[E-mail: Wandile.Ndwandwe@resbank.co.za. Tel: +27 12 399
+  6458.]'
+date: "12/10/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readr)
+library(plotly)
+library(lubridate)
+library(pander)
+library(tidyverse)
+library(htmltools)
+library(knitr)
+library(rmarkdown)
+library(stats)
+library(graphics)
+library(ggplot2)
+library(kableExtra)
+library(flextable)
+library(dygraphs)
+library(plotly)
+library(ggthemes)
+
+my_aesthetics <- 
+  theme_bw() +
+   theme(legend.position = "bottom",
+        legend.text=element_text(size=13),
+          legend.title = element_blank(),
+          axis.line = element_blank(),
+          panel.border = element_rect(colour = "black", fill = "NA", size = 2),
+          panel.background = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(), 
+          panel.grid.major.x = element_line("black"),
+          panel.grid.minor.x = element_blank(),
+          axis.text = element_text(colour="black"),
+          plot.title = element_text(face = "bold"),
+        plot.caption = element_text(hjust = 0, size = 13), 
+        text = element_text(size = 13,
+                              family = "serif",
+                              colour = "black")) 
+  
+
+Derivatives <- read_csv("~/R/Derivatives.csv")
+```
+
+## Derivatives
+
+Monthly average prices of domestic agricultural commodities increased on average by 5.2% in September 2020. Wheat prices were the exception which traded lower by 11.9%, while white and yellow maize prices increased by 11.8% an 8.7% respectively. Despite large supplies commodity prices remain at higher levels as growing global demand, primarily for yellow maize, the weaker domestic currency and generally higher global maize prices supported the increase in domestic maize prices. Wheat prices continued lower notwithstanding the lifting of the wheat import tariff as optimism reigns not only on global wheat production levels but also an expectation of the largest domestic wheat harvest in a decade on the back of increased area plantings and favourable rains in the Western Cape. The Agbiz/IDC Agribusiness Confidence Index rebounded from 39 points in the second quarter of 2020 to 51 points in the third quarter, indicating a marginal optimism about business conditions in South Africa.  
+
+
+```{r Derivatives, fig.align="center", echo=FALSE, fig.width = 10, fig.height = 4.5, warning=FALSE}
+#creating derivative plots
+ggplot(data=Derivatives) +
+  geom_line(aes(x = Date, y = RandPerTon, color = Commodity), size=1.2) +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust=0)) +
+  ggtitle("Monthly derivatives",subtitle = "Rand per ton") +
+  labs(caption = "Source: JSE")
+ggplotly()
+```
