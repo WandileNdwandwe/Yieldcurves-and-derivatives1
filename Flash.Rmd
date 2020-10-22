@@ -56,6 +56,8 @@ Sys.setenv(TZ="Africa/Johannesburg")
 library(tidyverse)
 Derivatives <- read_csv("~/R/Derivatives.csv")
 
+names(Derivatives)[3] <- "Price"
+
 library(lubridate)
 library(pander)
 library(htmltools)
@@ -92,15 +94,9 @@ my_aesthetics <-
         plot.caption = element_text(hjust = 0, size = 13), 
         text = element_text(size = 13,
                               family = "serif",
-                              colour = "black")) 
-  
-  
-  
-  
+                              colour = "black"))
   
 ```
-
-
 
 
 
@@ -116,8 +112,8 @@ my_aesthetics <-
 ```{r Derivatives, fig.align='center', echo=FALSE, fig.width = 10, fig.height = 4.5, warning=FALSE}
 
 
- ggplot(data=Derivatives) +
-  geom_line(aes(x = Date, y = RandPerTon, color = Commodity), size=1.2) +
+ggplot(data=Derivatives) +
+  geom_line(aes(x = Date, y = Price, color = Commodity), size=1.2) +
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 0, hjust = 1),
         plot.title = element_text(hjust = 0.5),
