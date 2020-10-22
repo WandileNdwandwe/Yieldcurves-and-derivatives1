@@ -100,7 +100,7 @@ my_aesthetics <-
 
 
 
-## Domestic agricultural commodity prices showed a mixed trend.
+## Domestic agricultural commodity prices displayed a mixed trend.
 
 <br>
 
