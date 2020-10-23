@@ -1,0 +1,59 @@
+---
+title: "September 2020 QB Review: Market for exchange-traded derivatives"
+author: 'Santa Rautenbach^[E-mail: Santa.Rautenbach@resbank.co.za. Tel: +27 12 313 3688.] and Wandile Ndwandwe^[E-mail: Wandile.Ndwandwe@resbank.co.za. Tel: +27 12 399 6458.]'
+date: "22/10/2020"
+output: html_document
+---
+
+<style>
+body{
+text-align: justify}
+</style>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readr)
+library(plotly)
+library(DT)
+
+DailyDerivatives <- read_csv("~/R/DailyDerivatives.csv")
+View(DailyDerivatives)
+
+Turnover <- read_csv("~/R/Turnover.csv")
+
+```
+
+
+## White and yellow maize
+
+The _spot prices of white and yellow maize contracts_ traded on the JSE displayed a mixed trend in the eight months to August 2020. The spot price of white maize decreased notably by 39.6% from R3 900 per ton on 16 April 2020 to R2 356 per ton on 27 May, supported by an expansion in area planted coupled with likely higher yields following favorable weather conditions. Subsequently, the spot price increased by 20.0% to R(2 827) on 11 September. Similarly, the spot price of yellow maize decreased by 16.6% from 22 April 2020 to 3 June, before increasing again by 14.8% to R(2 848) per ton on 11 September. Maize prices have been remarkably steady, notwithstanding expectations of a domestic harvest which is the second-largest maize harvest on record. The relative firmer maize prices was supported by a weaker domestic currency and strong demand from regional and deep-sea markets as well as the delay in producer deliveries because of the late start of planting.  Large maize supplies in the Southern Arica region is likely to fulfill consumption needs in the East Africa region where the emerging of locusts are destroying crops. South Africa has also resumed exports to deep-sea markets such as Taiwan and South Korea, with the likelihood of Vietnam and Japan in the near term.
+
+```{r DailyDerivatives, fig.align='center', echo=FALSE, fig.width = 10, fig.height = 4.5, warning=FALSE}
+
+
+ggplot(data=DailyDerivatives) +
+  geom_line(aes(x = Date, y = Prices, color = Commodity), size=1.2) +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 0, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust=0)) +
+  ggtitle("South African grain prices",subtitle = "Rand per ton") +
+  labs(caption = "Source: JSE")
+``` 
+
+### Wheat
+
+The _spot price of domestic wheat contracts_ continued higher in the first five months of 2020, before decreasing momentarily in June alongside international prices as global wheat production estimates sets a new record, underpinned by anticipated large harvests as well as improved weather conditions in most European countries. Subsequently, the spot price of wheat increased from a low of R5 135 per ton on 9 June 2020 to R6 900 per ton on 24 July before decreasing again to R(5 899) per ton on 11 September. Large global supplies could put further downward pressure on wheat prices to the benefit of South Africa, which is a net importer.
+
+### Turnover
+
+_Turnover in currency, equity and commodity derivatives_ on the JSE declined in the first eight months of 2020 when compared with the corresponding period of 2019. By contrast, turnover in interest rate derivatives increased modestly over the same period. Trading in equity derivatives continued to dominate overall derivatives trading on the JSE.
+
+```{r Turnover, echo=FALSE, message=FALSE, warnings=FALSE}
+Turnover %>% datatable(rownames=FALSE, head(iris),
+  caption = 'Derivatives turnover on the JSE, January to August 2020') 
+```
