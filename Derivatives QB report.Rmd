@@ -20,7 +20,6 @@ library(plotly)
 library(DT)
 
 DailyDerivatives <- read_csv("~/R/DailyDerivatives.csv")
-View(DailyDerivatives)
 
 Turnover <- read_csv("~/R/Turnover.csv")
 
